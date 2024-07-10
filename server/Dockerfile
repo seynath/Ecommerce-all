@@ -2,12 +2,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Set environment variables
-ENV MYSQL_HOST="ecom.mysql.database.azure.com"
-ENV MYSQL_USER="seynath"
-ENV MYSQL_PASSWORD="Lonath1234#"
-ENV MYSQL_DB="ecomnew"
+ARG MYSQL_HOST
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_DB
 
+ENV MYSQL_HOST=$MYSQL_HOST
+ENV MYSQL_USER=$MYSQL_USER
+ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
+ENV MYSQL_DB=$MYSQL_DB
 
 COPY package*.json ./
 RUN npm install
