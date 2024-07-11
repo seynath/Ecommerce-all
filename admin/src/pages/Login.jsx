@@ -1,11 +1,11 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { login, cashierLogin } from "../features/auth/authSlice";
-import heroImg from "../assets/hero3.jpg"
+import heroImg from "../assets/hero3.jpg";
 
 let schema = yup.object().shape({
   email: yup
@@ -16,7 +16,7 @@ let schema = yup.object().shape({
   password: yup.string().min(8).max(50).required("Password is Required"),
 });
 const Login = () => {
-  const [cashier,setCashier] = useState(false)
+  const [cashier, setCashier] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,47 +27,53 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      if(cashier){
-        dispatch(cashierLogin(values))
-        .then((response) =>{
-          if(response.payload.token){
-            window.location.replace("/cashier")
-            // navigate("/cashier")
+      if (cashier) {
+        dispatch(cashierLogin(values)).then((response) => {
+          if (response.payload.token) {
+            // window.location.replace("/cashier");
+            navigate("/cashier")
           }
-        //   console.log(response);
-        //   if(response.payload.isAdmin == "cashier"){
-        //   navigate("/cashier")
-        // } else if(response.payload.isAdmin == "admin"){
-        //   navigate("/admin")
-        // }
-      }
-       )
-      }
-      else{
-
-        dispatch(login(values))
-        .then(
-          (response) =>{
-            if(response.payload.token){
-              // navigate("/admin")
-              window.location.replace("/admin")
-            }
+          //   console.log(response);
+          //   if(response.payload.isAdmin == "cashier"){
+          //   navigate("/cashier")
+          // } else if(response.payload.isAdmin == "admin"){
+          //   navigate("/admin")
+          // }
+        });
+      } else {
+        dispatch(login(values)).then((response) => {
+          if (response.payload.token) {
+            navigate("/admin")
+            // window.location.replace("/admin");
           }
-        )
+        });
         // .then(() => navigate("/admin"))
       }
     },
   });
 
   const authState = useSelector((state) => state);
-  const { user = {}, isError, isSuccess, isLoading, message } = authState?.auth || {};
+  const {
+    user = {},
+    isError,
+    isSuccess,
+    isLoading,
+    message,
+  } = authState?.auth || {};
 
   console.log(user);
 
-
-  
   return (
-    <div className="py-5" style={{ background: "#ffd333", minHeight: "100vh" ,backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+    <div
+      className="py-5"
+      style={{
+        background: "#ffd333",
+        minHeight: "100vh",
+        backgroundImage: `url(${heroImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <br />
       <br />
       <br />
@@ -79,7 +85,7 @@ const Login = () => {
         <div className="error text-center">
           {message.message === "Rejected" ? "You are not an Admin" : ""}
         </div>
-        <form action="" onSubmit={formik.handleSubmit}>          
+        <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
             label="Email Address"
