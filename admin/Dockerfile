@@ -7,6 +7,10 @@ ARG VITE_BASE_URL
 # Environment variables
 ENV VITE_BASE_URL=$VITE_BASE_URL
 
+RUN npm install
+RUN npm run build
+
+
 # Copy the build output to replace the default nginx contents
 COPY ./dist /usr/share/nginx/html
 
