@@ -11,6 +11,7 @@ const db = mysql.createConnection({
   ssl: {
     rejectUnauthorized: false
   }
+   
 });
 
 module.exports = {db}

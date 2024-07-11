@@ -8,6 +8,5 @@
 //     .then(() => console.log('MongoDB connected'))
 //     .catch((err) => console.log(err));
 // }
-//all good check
 
 // module.exports = dbConnect;
