@@ -153,7 +153,8 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(3);
                       }}
-                      src="./src/assets/gr4.svg"
+                      // src="./src/assets/gr4.svg"
+                      src="https://res.cloudinary.com/dzqihtcs4/image/upload/v1721386721/gr4_w5umjb.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -161,7 +162,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(4);
                       }}
-                      src="./src/assets/gr3.svg"
+                      src="https://res.cloudinary.com/dzqihtcs4/image/upload/v1721386722/gr3_mr2ay0.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -169,7 +170,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(6);
                       }}
-                      src="./src/assets/gr2.svg"
+                      src="https://res.cloudinary.com/dzqihtcs4/image/upload/v1721386722/gr2_mlgkk4.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -178,7 +179,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(12);
                       }}
-                      src="./src/assets/gr.svg"
+                      src="https://res.cloudinary.com/dzqihtcs4/image/upload/v1721386722/gr_pybjbe.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />

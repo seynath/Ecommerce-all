@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -41,10 +42,18 @@ import EditCategory from "./pages/EditCategory";
 import EditColor from "./pages/EditColor";
 import BulkOrders from "./pages/BulkOrders";
 
-const user = JSON.parse(localStorage.getItem("user"));
-console.log(user);
+
+
 
 function App() {
+  const [user, setUser] = useState(null); 
+  
+  useEffect(() => {
+    // Get user data from localStorage on component mount
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser); 
+  }, []); 
+
   return (
     <Router>
       <Routes>
@@ -55,11 +64,9 @@ function App() {
         <Route
           path="/cashier"
           element={
-            user?.isAdmin === "admin" || user?.isAdmin === "cashier" ? (
+           
               <CashierMainLayout />
-            ) : (
-              <Login />
-            )
+    
           }
         >
           <Route index element={<CashierSales />} />
@@ -70,7 +77,7 @@ function App() {
 
         <Route
           path="/admin"
-          element={user?.isAdmin === "admin" ? <MainLayout /> : <Login />}
+          element={<MainLayout /> }
         >
           <Route index element={<DashboardPowerBI />} />
           <Route path="enquiries" element={<Enquiries />} />
