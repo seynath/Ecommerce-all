@@ -165,7 +165,7 @@ const SingleProduct = () => {
 
     img: singleProduct?.image_link
       ? singleProduct?.image_link
-      : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
+      : "https://res.cloudinary.com/dzqihtcs4/image/upload/v1721382354/mmvu3uvmhsxsoxyyylf2.png",
   };
 
   // const copyToClipboard = (text) => {

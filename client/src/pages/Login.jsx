@@ -44,8 +44,8 @@ const navigate = useNavigate();
         if (response.payload.token) {
           toast.success("Login Successfull")
   
-          window.location.href = "/";
-          // navigate("/");
+          // window.location.href = "/";
+          navigate("/");
         }else {
           toast.error("Login Failed")
         }

@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
 import { services } from "../utils/Data";
+import serviceImage from "../assets/service-02.png"
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, getWishlist } from "../features/products/productSlice";
 import Hero from "../components/Hero";
@@ -21,6 +22,13 @@ const Home = () => {
       if(user){
         await dispatch(getCart());
         await dispatch(getWishlist());
+
+
+
+
+
+
+
       }
     }
   

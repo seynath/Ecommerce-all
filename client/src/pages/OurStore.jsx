@@ -153,7 +153,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(3);
                       }}
-                      src="images/gr4.svg"
+                      src="./src/assets/gr4.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -161,7 +161,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(4);
                       }}
-                      src="images/gr3.svg"
+                      src="./src/assets/gr3.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -169,7 +169,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(6);
                       }}
-                      src="images/gr2.svg"
+                      src="./src/assets/gr2.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
@@ -178,7 +178,7 @@ const OurStore = () => {
                       onClick={() => {
                         setGrid(12);
                       }}
-                      src="images/gr.svg"
+                      src="./src/assets/gr.svg"
                       className="d-block img-fluid"
                       alt="grid"
                     />
