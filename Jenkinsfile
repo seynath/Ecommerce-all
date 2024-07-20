@@ -38,7 +38,7 @@ pipeline {
                           -Dsonar.projectKey=ecomserver \\
                           -Dsonar.projectName=ecomserver \\
                           -Dsonar.sources=. \\
-                          -Dsonar.host.url=http://34.46.247.76:9000/ \\
+                          -Dsonar.host.url=http://34.69.144.49:9000/ \\
                           -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
