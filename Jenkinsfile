@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'seynath/ecomclient'
     }
-
+//test1
     stages {
         stage('Clone Repository') {
             steps {
