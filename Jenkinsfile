@@ -2,37 +2,77 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'seynath/ecomserver' // Change 'username' to your Docker Hub username
-        // SCANNER_HOME= tool 'sonar-scanner'
-        SCANNER_HOME= "${tool 'sonar-scanner'}"
+        DOCKER_IMAGE = 'seynath/ecomserver'
+        SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the repository that contains your Node.js app and Dockerfile
                 git branch: 'server', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-               
+         
                         sh """
-                        $SCANNER_HOME \
-                          -Dsonar.projectKey=ecomserver \
-                          -Dsonar.projectName=ecomserver
-                          -Dsonar.sources=. \
-                          -Dsonar.host.url=http://34.46.247.76:9000/ \
+                        ${SCANNER_HOME}/bin/sonar-scanner \\
+                          -Dsonar.projectKey=ecomserver \\
+                          -Dsonar.projectName=ecomserver \\
+                          -Dsonar.sources=. \\
+                          -Dsonar.host.url=http://34.46.247.76:9000/ \\
                           -Dsonar.login=squ_4e21ab28903af205cc9e105fb28f4019ec09d02c
                         """
-                    }
+                    
                 
-            
+            }
         }
-
     }
 }
+
+
+
+
+
+
+
+
+// pipeline {
+//     agent any
+
+//     environment {
+//         DOCKER_IMAGE = 'seynath/ecomserver' // Change 'username' to your Docker Hub username
+//         // SCANNER_HOME= tool 'sonar-scanner'
+//         SCANNER_HOME= "${tool 'sonar-scanner'}"
+//     }
+
+//     stages {
+//         stage('Clone Repository') {
+//             steps {
+//                 // Clone the repository that contains your Node.js app and Dockerfile
+//                 git branch: 'server', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
+//             }
+//         }
+
+//         stage('SonarQube Analysis') {
+//             steps {
+               
+//                         sh """
+//                         $SCANNER_HOME \
+//                           -Dsonar.projectKey=ecomserver \
+//                           -Dsonar.projectName=ecomserver
+//                           -Dsonar.sources=. \
+//                           -Dsonar.host.url=http://34.46.247.76:9000/ \
+//                           -Dsonar.login=squ_4e21ab28903af205cc9e105fb28f4019ec09d02c
+//                         """
+//                     }
+                
+            
+//         }
+
+//     }
+// }
 
 
 
