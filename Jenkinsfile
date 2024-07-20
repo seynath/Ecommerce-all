@@ -19,7 +19,7 @@ pipeline {
             steps {
                
                         sh """
-                        $SCANNER_HOME/bin/sonar-scanner \
+                        $SCANNER_HOME \
                           -Dsonar.projectKey=ecomserver \
                           -Dsonar.projectName=ecomserver
                           -Dsonar.sources=. \
