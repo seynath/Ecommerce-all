@@ -13,11 +13,10 @@ pipeline {
                 git branch: 'server', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
             }
         }
-        
+
         stage('SonarQube Analysis') {
             steps {
-                script {
-                    withSonarQubeEnv('My SonarQube Server') { // Replace 'My SonarQube Server' with the name you configured in Jenkins
+               
                         sh """
                         $SCANNER_HOME/bin/sonar-scanner \
                           -Dsonar.projectKey=ecomserver \
@@ -27,8 +26,8 @@ pipeline {
                           -Dsonar.login=squ_033e3ee6ff4c3c452a28639801515d34a7b932be
                         """
                     }
-                } 
-            }
+                
+            
         }
 
 
