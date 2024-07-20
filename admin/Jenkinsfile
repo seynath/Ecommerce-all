@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the repository that contains your Node.js app and Dockerfile
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
+                git branch: 'admin', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
             }
         }
 
