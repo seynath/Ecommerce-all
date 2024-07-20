@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'seynath/ecomadmin'
     }
+    //test1 admin multibranch
 
     stages {
         stage('Clone Repository') {
