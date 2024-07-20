@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'seynath/ecomserver'
-        SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
+        // SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
+        SCANNER_HOME = 'sonar-scanner'
     }
 
     stages {
@@ -28,6 +29,23 @@ pipeline {
                 
             }
         }
+
+        //  stage('SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //             withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+        //                 sh """
+        //                 ${SCANNER_HOME}/bin/sonar-scanner \\
+        //                   -Dsonar.projectKey=ecomserver \\
+        //                   -Dsonar.projectName=ecomserver \\
+        //                   -Dsonar.sources=. \\
+        //                   -Dsonar.host.url=http://34.46.247.76:9000/ \\
+        //                   -Dsonar.login=${SONAR_TOKEN}
+        //                 """
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
 
