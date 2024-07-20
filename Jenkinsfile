@@ -12,6 +12,7 @@ pipeline {
                 git branch: 'server', changelog: false, poll: false, url: 'https://github.com/seynath/Ecommerce-all.git'
             }
         }
+        //test1 server
 
         stage('Build Docker Image') {
             steps {
