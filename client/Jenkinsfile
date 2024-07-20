@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'seynath/ecomadmin'
+        DOCKER_IMAGE = 'seynath/ecomclient'
     }
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
                 // Use a Node.js Docker container to run npm install
                 script {
                     docker.image('node:20-alpine').inside('-u root') {
-                        dir('admin') {
+                        dir('client') {
                             // Check the user running the container
                             sh 'whoami'
                             // Set npm cache to a directory with appropriate permissions
@@ -36,7 +36,7 @@ pipeline {
                 // Use a Node.js Docker container to build the Vite app
                 script {
                     docker.image('node:20-alpine').inside('-u root') {
-                        dir('admin') {
+                        dir('client') {
                             sh 'npm run build'
                         }
                     }
@@ -52,7 +52,7 @@ pipeline {
                         string(credentialsId: 'vite_base_url', variable: 'VITE_BASE_URL')
                     ]) {
                         def commitId = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                        dir('admin') {
+                        dir('client') {
                             sh """
                                 docker build --build-arg VITE_BASE_URL=${VITE_BASE_URL} -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .
                             """
@@ -78,7 +78,7 @@ pipeline {
         stage('Trigger CD Pipeline') {
             steps {
                 // Trigger another job
-                build job: 'adminCD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'clientCD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
