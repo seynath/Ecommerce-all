@@ -24,7 +24,7 @@ pipeline {
                           -Dsonar.projectName=ecomserver
                           -Dsonar.sources=. \
                           -Dsonar.host.url=http://34.46.247.76:9000/ \
-                          -Dsonar.login=squ_033e3ee6ff4c3c452a28639801515d34a7b932be
+                          -Dsonar.login=squ_4e21ab28903af205cc9e105fb28f4019ec09d02c
                         """
                     }
                 
