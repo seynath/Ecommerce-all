@@ -81,7 +81,7 @@ pipeline {
         stage('Trigger CD Pipeline') {
             steps {
                 // Trigger another job
-                build job: 'updatecd', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'server-CD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
