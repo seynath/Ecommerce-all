@@ -17,19 +17,40 @@ pipeline {
         }
         //test1 server
 
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         // Make sure to cd into the server directory before running the analysis
+        //         dir('server') {
+        //            withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+        //                 sh """
+        //                 ${SCANNER_HOME}/bin/sonar-scanner \\
+        //                   -Dsonar.projectKey=ecomserver \\
+        //                   -Dsonar.projectName=ecomserver \\
+        //                   -Dsonar.sources=. \\
+        //                   -Dsonar.host.url=http://35.222.2.63:9000/  \\
+        //                   -Dsonar.login=${SONAR_TOKEN}
+        //                 """
+        //             }
+        //         }
+        //     }
+        // }
+
         stage('SonarQube Analysis') {
             steps {
-                // Make sure to cd into the server directory before running the analysis
-                dir('server') {
-                   withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
-                        sh """
-                        ${SCANNER_HOME}/bin/sonar-scanner \\
-                          -Dsonar.projectKey=ecomserver \\
-                          -Dsonar.projectName=ecomserver \\
-                          -Dsonar.sources=. \\
-                          -Dsonar.host.url=http://35.222.2.63:9000/  \\
-                          -Dsonar.login=${SONAR_TOKEN}
-                        """
+                script {
+                    docker.image('node:20-alpine').inside('-u root') {
+                        dir('server') {
+                            withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+                                sh """
+                                ${SCANNER_HOME}/bin/sonar-scanner \\
+                                  -Dsonar.projectKey=ecomserver \\
+                                  -Dsonar.projectName=ecomserver \\
+                                  -Dsonar.sources=. \\
+                                  -Dsonar.host.url=http://35.222.2.63:9000/ \\
+                                  -Dsonar.login=${SONAR_TOKEN}
+                                """
+                            }
+                        }
                     }
                 }
             }
