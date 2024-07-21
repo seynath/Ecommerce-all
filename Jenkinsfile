@@ -74,6 +74,13 @@ pipeline {
             }
         }
 
+        stage('TRIVY SCAN') {
+            steps {
+                sh "trivy image seynath/${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                
+            }
+        }
+
         stage('Publish Docker Image') {
             steps {
                 // Log in to Docker Hub
