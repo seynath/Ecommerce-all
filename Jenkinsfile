@@ -64,6 +64,17 @@ pipeline {
             }
         }
 
+        stage('OWASP SCAN') {
+            steps {
+                // Make sure to cd into the server directory before running the analysis
+                dir('client') {
+                   dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DP'
+                   dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -81,6 +92,15 @@ pipeline {
                 }
             }
         }
+        
+        
+        stage('TRIVY SCAN') {
+            steps {
+                sh "trivy image ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                
+            }
+        }
+        
 
         stage('Publish Docker Image') {
             steps {
