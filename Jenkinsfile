@@ -14,6 +14,24 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                // Make sure to cd into the server directory before running the analysis
+                dir('client') {
+                   withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \\
+                          -Dsonar.projectKey=ecomclient \\
+                          -Dsonar.projectName=ecomclient \\
+                          -Dsonar.sources=. \\
+                          -Dsonar.host.url=http://35.222.2.63:9000/  \\
+                          -Dsonar.login=${SONAR_TOKEN}
+                        """
+                    }
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 // Use a Node.js Docker container to run npm install
@@ -79,7 +97,7 @@ pipeline {
         stage('Trigger CD Pipeline') {
             steps {
                 // Trigger another job
-                build job: 'adminCD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'admin-CD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
