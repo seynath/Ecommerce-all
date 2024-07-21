@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'seynath/ecomclient'
+        SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
+
     }
 //test1
     stages {
@@ -26,6 +28,24 @@ pipeline {
                             sh 'npm cache clean --force'
                             sh 'npm install'
                         }
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                // Make sure to cd into the server directory before running the analysis
+                dir('client') {
+                   withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \\
+                          -Dsonar.projectKey=ecomclient \\
+                          -Dsonar.projectName=ecomclient \\
+                          -Dsonar.sources=. \\
+                          -Dsonar.host.url=http://34.69.144.49:9000/  \\
+                          -Dsonar.login=${SONAR_TOKEN}
+                        """
                     }
                 }
             }
@@ -78,7 +98,7 @@ pipeline {
         stage('Trigger CD Pipeline') {
             steps {
                 // Trigger another job
-                build job: 'clientCD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+                build job: 'client-CD', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
             }
         }
     }
