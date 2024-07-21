@@ -5,7 +5,6 @@ pipeline {
         DOCKER_IMAGE = 'seynath/ecomadmin'
         SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
     }
-    //test1 admin multibranch
 
     stages {
         stage('Clone Repository') {
@@ -18,17 +17,27 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Make sure to cd into the server directory before running the analysis
-                dir('client') {
+                dir('admin') {
                    withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
                         sh """
                         ${SCANNER_HOME}/bin/sonar-scanner \\
-                          -Dsonar.projectKey=ecomclient \\
-                          -Dsonar.projectName=ecomclient \\
+                          -Dsonar.projectKey=ecomadmin \\
+                          -Dsonar.projectName=ecomadmin \\
                           -Dsonar.sources=. \\
                           -Dsonar.host.url=http://35.222.2.63:9000/  \\
                           -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
+                }
+            }
+        }
+
+        stage('OWASP SCAN') {
+            steps {
+                // Make sure to cd into the server directory before running the analysis
+                dir('admin') {
+                   dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DP'
+                   dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
         }
@@ -79,6 +88,14 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+
+
+        stage('TRIVY SCAN') {
+            steps {
+                sh "trivy image ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                
             }
         }
 
