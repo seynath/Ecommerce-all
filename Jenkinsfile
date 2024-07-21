@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Make sure to cd into the server directory before running the analysis
                 dir('server') {
-                   dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DC'
+                   dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DP'
                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
                 }
             }
