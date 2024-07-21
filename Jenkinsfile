@@ -76,7 +76,7 @@ pipeline {
 
         stage('TRIVY SCAN') {
             steps {
-                sh "trivy image seynath/${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                sh "trivy image ${DOCKER_IMAGE}:${BUILD_NUMBER}"
                 
             }
         }
