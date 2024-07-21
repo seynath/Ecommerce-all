@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'seynath/ecomserver' // Change 'username' to your Docker Hub username
-        SCANNER_HOME = '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner'
+        SCANNER_HOME = tool 'sonar-scanner'
 
     }
 
