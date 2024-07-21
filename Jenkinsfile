@@ -35,6 +35,16 @@ pipeline {
             }
         }
 
+        stage('OWASP SCAN') {
+            steps {
+                // Make sure to cd into the server directory before running the analysis
+                dir('server') {
+                   dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DC'
+                   dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
