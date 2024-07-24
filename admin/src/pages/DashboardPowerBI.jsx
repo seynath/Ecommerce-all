@@ -263,9 +263,14 @@ const DashboardPowerBI = () => {
 
   return (
     <div className="d-flex w-100 h-100 flex-column">
-      <h3>Online Order Analytics</h3>
+      <div 
+      style={{backgroundColor:"white"}}
+      >
+<iframe title="ecomdash" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=bd4acb73-249d-4dec-ad96-01b8906a3b06&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7" frameborder="0" allowFullScreen="true"></iframe>
+      </div>
 
       <div className="row w-100 d-flex justify-content-center">
+      <h3>Realtime Online Order Analytics</h3>
         <div className="col-4">
           <h5>Daily Online Amount</h5>
           <Bar data={chartData} />
