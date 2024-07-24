@@ -39,7 +39,19 @@ const InventoryReport = () => {
   return (
     <div className="container">
       <h1 className="mt-4">Inventory Report</h1>
-      <button onClick={handleDownloadExcel} className="btn btn-primary mb-3">Download Excel</button>
+      <button onClick={handleDownloadExcel} className="btn btn-primary mb-3"
+        style={{
+          backgroundColor: "#000000",
+          color: "white",
+          padding: "10px 15px",
+          border: "none",
+          borderRadius: "25px",
+          cursor: "pointer",
+          fontSize: "16px",
+          margin: "10px 0",
+          width:"25%"
+        }}
+      >Download Excel</button>
       <table className="table table-bordered table-hover table-striped mt-2 table-sm">
         <thead>
           <tr>
