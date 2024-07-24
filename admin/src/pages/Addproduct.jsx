@@ -550,6 +550,23 @@ const Addproduct = () => {
     },
   });
 
+  const inputStyle = {
+    borderRadius: "12px", // Increased border radius for a more rounded appearance
+    border: "1px solid #003063", // A solid border with a color that stands out
+    padding: "10px", // Adequate padding for better text visibility and comfort
+    margin: "5px 0", // Margin to ensure inputs don't touch each other or other elements
+    width: "100%", // Adjust width as needed, accounting for padding and border
+    boxSizing: "border-box", // Ensures padding and border are included in the total width and height
+    fontSize: "16px", // Slightly larger font size for better readability
+    color: "#495057", // A color that ensures good readability
+    backgroundColor: "#fff", // A background color that contrasts well with the text and border
+    transition: "border-color .15s ease-in-out,box-shadow .15s ease-in-out", // Smooth transition for focus
+    ':focus': {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)", // A subtle box-shadow on focus
+      borderColor: "#80bdff", // Change border color on focus for better visual feedback
+    }
+  };
+
   return (
     <div className="container">
       {" "}
@@ -561,13 +578,14 @@ const Addproduct = () => {
           onSubmit={formik.handleSubmit}
           className="d-flex gap-3 flex-column p-5"
         >
-          <CustomInput
+          <input
+          style={inputStyle}
             type="text"
             label="Enter Product Title"
             name="title"
-            onChng={formik.handleChange("title")}
-            onBlr={formik.handleBlur("title")}
-            val={formik.values.title}
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+            value={formik.values.title}
             className="form-control"
           />
           <div className="error text-danger">
@@ -576,7 +594,11 @@ const Addproduct = () => {
             {formik.touched.title && formik.errors.title}
           </div>
 
-          <div className="mb-3">
+          <div className="mb-3"
+                    style={inputStyle}
+
+          >
+
             <ReactQuill
               placeholder="Add Description"
               theme="snow"
@@ -592,13 +614,15 @@ const Addproduct = () => {
             {formik.touched.description && formik.errors.description}
           </div>
 
-          <CustomInput
+          <input
             type="text"
+            style={inputStyle}
+
             label="Enter Product Brand"
             name="brand"
-            onChng={formik.handleChange("brand")}
-            onBlr={formik.handleBlur("brand")}
-            val={formik.values.brand}
+            onChange={formik.handleChange("brand")}
+            onBlur={formik.handleBlur("brand")}
+            value={formik.values.brand}
             className="form-control"
           />
           <div className="error text-danger">
@@ -610,6 +634,8 @@ const Addproduct = () => {
           {/* Category */}
           <select
             name="category"
+            style={inputStyle}
+
             onChange={formik.handleChange("category")}
             onBlur={formik.handleBlur("category")}
             value={formik.values.category}
@@ -631,7 +657,10 @@ const Addproduct = () => {
             {formik.touched.category && formik.errors.category}
           </div>
 
-          <div className="bg-white border border-secondary p-5 text-center">
+          <div className="bg-white border border-secondary p-5 text-center"
+          style={{borderRadius:"20px"}}
+          
+          >
             {/* <Dropzone onDrop={(acceptedFiles) => setImages(acceptedFiles)}> */}
             <Dropzone onDrop={(acceptedFiles) => setImages(acceptedFiles)}>
               {({ getRootProps, getInputProps }) => (
@@ -764,31 +793,57 @@ const Addproduct = () => {
             </div>
           ))}
 
-          <button
-            type="button"
-            onClick={() =>
-              setAttributes([
-                ...attributes,
-                {
-                  size: "",
-                  color: "",
-                  quantity: "",
-                  price: "",
-                  buyingPrice: "",
-                },
-              ])
-            }
-            className="btn btn-primary btn-sm my-3"
-          >
-            Add attribute
-          </button>
+<div
+style={{display:"flex",justifyContent:"space-between"}}
 
-          <button
-            className="btn btn-success btn-lg rounded-3 my-5"
-            type="submit"
-          >
-            Add Product
-          </button>
+>
+
+<button
+  type="button"
+  onClick={() =>
+    setAttributes([
+      ...attributes,
+      {
+        size: "",
+        color: "",
+        quantity: "",
+        price: "",
+        buyingPrice: "",
+      },
+    ])
+  }
+  style={{
+    backgroundColor: "#000000",
+    color: "white",
+    padding: "10px 15px",
+    border: "none",
+    borderRadius: "25px",
+    cursor: "pointer",
+    fontSize: "16px",
+    margin: "10px 0",
+    width:"45%"
+  }}
+>
+  Add attribute
+</button>
+
+<button
+  style={{
+    backgroundColor: "#FAB604",
+    color: "black",
+    padding: "10px 15px",
+    border: "none",
+    borderRadius: "25px",
+    cursor: "pointer",
+    fontSize: "16px",
+    margin: "10px 0",
+    width:"45%"
+  }}
+  type="submit"
+>
+  Add Product
+</button>
+</div>
         </form>
       </div>
     </div>

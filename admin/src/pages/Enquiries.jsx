@@ -83,6 +83,7 @@ const Enquiries = () => {
       status: (
         <>
           <select
+          style={{backgroundColor:"#c1c1c1", color:"black"}}
             name=""
             defaultValue={
               enqState[i].enquiry_status
