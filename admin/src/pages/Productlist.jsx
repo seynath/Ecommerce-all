@@ -5,6 +5,9 @@ import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProduct } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+
+
 
 const columns = [
   {
@@ -109,7 +112,7 @@ const Productlist = () => {
           </Link> */}
           <Link
             to={`/admin/edit-product/${productState[i].p_id}`}
-            className="fs-3 text-danger"
+            className="fs-3 text-standard"
           >
             <BiEdit />
           </Link>
@@ -129,6 +132,7 @@ const Productlist = () => {
             onClick={() => showDeleteConfirm(productState[i].p_id)}
             className="ms-3 fs-3 text-danger"
           />
+          
         </>
       ),
     });

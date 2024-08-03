@@ -60,6 +60,15 @@ const SupplierList = () => {
           <Button
             type="primary"
             className="mx-1"
+            style={{
+              backgroundColor: "#000000",
+              color: "white",
+              border: "none",
+              borderRadius: "25px",
+              width:"220px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
             onClick={() => {
               setSelectedSupplier(record);
               setIsModalOpen2(true);
@@ -70,12 +79,26 @@ const SupplierList = () => {
           </Button>
           <Link to={`/admin/edit-supplier/${record.supplier_id}`}>
             <Button type="primary"
+            style={{
+              backgroundColor: "#000000",
+              color: "white",
+              border: "none",
+              borderRadius: "25px",
+              width:"80px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
             className="mx-1">Edit</Button>
           </Link>
           <Button
             type="primary"
             className="mx-1"
             danger
+            style={{
+              
+              width:"80px",
+              borderRadius:"20px"
+            }}
             onClick={() => {
               setIsModalVisible(true)
               showDeleteConfirm(record.supplier_id)
