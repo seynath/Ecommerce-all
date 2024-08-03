@@ -67,7 +67,19 @@ const Orders = () => {
       dataIndex: 'view_ordered_products',
       key: 'view_ordered_products',
       render: (text, record) => (
-        <Button type="primary" onClick={() => showOrderedProducts(record)}>
+        <Button type="primary" onClick={() => showOrderedProducts(record)}
+        style={{
+          backgroundColor: "#000000",
+          color: "white",
+          padding: "10px 15px",
+          border: "none",
+          borderRadius: "25px",
+          cursor: "pointer",
+          fontSize: "16px",
+          margin: "10px 0",
+          // width:"45%"
+        }}
+        >
           View Ordered Products
         </Button>
       ),
